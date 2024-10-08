@@ -1,19 +1,24 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import PostsView from "../views/PostsView.vue";
+import PostDetailView from "../views/PostDetailView.vue"; // Import the PostDetailView component
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: HomeView,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: "/posts",
+    name: "posts",
+    component: PostsView,
+  },
+  {
+    path: "/posts/:id", // Dynamic route for individual posts
+    name: "post-detail",
+    component: PostDetailView, // Component to display post details
+    props: true, // Pass route params as props to the component
   },
 ];
 
