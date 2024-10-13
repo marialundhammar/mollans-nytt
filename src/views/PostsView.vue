@@ -22,7 +22,7 @@
 import { defineComponent, ref, onMounted } from "vue";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import PostItem from "@/components/PostItem.vue"; // Import PostItem component
+import PostItem from "@/components/PostItem.vue";
 
 export default defineComponent({
   name: "PostsView",

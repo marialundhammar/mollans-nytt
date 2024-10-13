@@ -2,10 +2,8 @@
   <div class="bg-gray-800">
     <nav class="fixed top-0 left-0 z-50 w-full p-4">
       <div class="container flex items-center justify-between mx-auto">
-        <!-- Logo or brand name -->
         <div class="text-4xl font-bold text-white">🪱</div>
 
-        <!-- Navigation links -->
         <ul class="flex space-x-4 text-xl text-red-600">
           <li>
             <router-link class="font-semibold hover:underline hover:cursor-pointer" to="/posts"
@@ -16,7 +14,7 @@
             <a
               @click.prevent="scrollTo(adviceSection)"
               class="font-semibold hover:cursor-pointer hover:underline"
-              >Tipsa oss!?</a
+              >Tipsa oss</a
             >
           </li>
           <li>
@@ -59,12 +57,26 @@
       </div>
     </div>
 
-    <div ref="adviceSection" class="h-screen">
-      <h2 class="text-3xl text-center">Tipsa oss!?</h2>
+    <div ref="adviceSection" class="mt-12">
+      <Suggestions />
     </div>
 
-    <div ref="subscribeSection" class="h-screen bg-gray-300">
-      <h2 class="text-3xl text-center">Prenumerera</h2>
+    <div ref="subscribeSection" class="relative h-screen bg-gray-300 pt-36">
+      <!-- First rolling text row -->
+      <div class="absolute top-0 left-0 z-10 w-full text-5xl whitespace-nowrap animate-marquee">
+        Prenumerera 🔥 Prenumerera 🔥 Prenumerera 🔥 Prenumerera 🔥 Prenumerera 🔥 🔥 Prenumerera 🔥
+        🔥 Prenumerera 🔥
+      </div>
+
+      <!-- Second rolling text row -->
+      <div
+        class="absolute left-0 z-10 w-full text-5xl top-12 whitespace-nowrap animate-marquee-reverse"
+      >
+        Prenumerera 🔥 Prenumerera 🔥 Prenumerera 🔥 Prenumerera 🔥 Prenumerera 🔥 🔥 Prenumerera 🔥
+        🔥 Prenumerera 🔥
+      </div>
+
+      <Subscribe />
     </div>
   </div>
 </template>
@@ -73,14 +85,14 @@
 import { ref, onMounted, computed } from "vue";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import PostItem from "@/components/PostItem.vue"; // Import PostItem component
+import PostItem from "@/components/PostItem.vue";
+import Suggestions from "@/components/Suggestions.vue";
+import Subscribe from "@/components/Subscribe.vue";
 
-// Define refs for sections
 const postsSection = ref<HTMLElement | null>(null);
 const adviceSection = ref<HTMLElement | null>(null);
 const subscribeSection = ref<HTMLElement | null>(null);
 
-// Function to scroll to a specific section
 function scrollTo(section: HTMLElement | null) {
   section?.scrollIntoView({ behavior: "smooth" });
 }
@@ -120,5 +132,29 @@ onMounted(() => {
   background-size: cover;
   background-position: start;
   background-repeat: no-repeat;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 20s linear infinite;
 }
 </style>

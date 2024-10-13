@@ -3,7 +3,6 @@ import HeaderNavbar from "./components/HeaderNavbar.vue";
 </script>
 
 <template>
-  <HeaderNavbar></HeaderNavbar>
   <router-view />
 </template>
 
